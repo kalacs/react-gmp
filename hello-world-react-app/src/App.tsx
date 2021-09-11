@@ -3,6 +3,7 @@ import "./App.css";
 import { CounterCreateElement } from "./components/CounterCreateElement";
 import { CounterComponent } from "./components/CounterComponent";
 import { CounterPureComponent } from './components/CounterPureComponent';
+import { CounterFunction } from './components/CounterFunction';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <CounterCreateElement />
       <CounterComponent />
       <CounterPureComponent />
+      <CounterFunction />
     </>
   );
 }
