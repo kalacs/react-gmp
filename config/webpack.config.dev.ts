@@ -6,7 +6,7 @@ import { WebpackDevConfiguration } from './webpack.models';
 
 export const webpackDevConfigPart: WebpackDevConfiguration = {
   mode: 'development',
-  devtool: 'eval',
+  devtool: 'source-map',
   devServer: {
     open: true,
     hot: true,
