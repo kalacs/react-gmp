@@ -4,7 +4,11 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 
 export const config: Configuration = {
   entry: resolve("src", "index.tsx"),
-  output: { path: resolve("build"), filename: "[name].[chunkhash].bundle.js" },
+  output: {
+    path: resolve("build"),
+    filename: "[name].[chunkhash].bundle.js",
+    clean: true,
+  },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
@@ -20,7 +24,6 @@ export const config: Configuration = {
         exclude: /node_modules/,
         use: ["ts-loader"],
       },
-      // todo use react in js
       {
         test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
         use: ["file-loader"],
