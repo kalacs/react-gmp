@@ -4,11 +4,6 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 
 export const config: Configuration = {
   entry: resolve("src", "index.tsx"),
-  output: {
-    path: resolve("build"),
-    filename: "[name].[chunkhash].bundle.js",
-    clean: true,
-  },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },

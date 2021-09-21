@@ -1,5 +1,6 @@
 
 import { merge } from 'webpack-merge';
+import { resolve } from 'path';
 
 import { config } from './webpack.config.common';
 import { WebpackDevConfiguration } from './webpack.models';
@@ -7,10 +8,15 @@ import { WebpackDevConfiguration } from './webpack.models';
 export const webpackDevConfigPart: WebpackDevConfiguration = {
   mode: 'development',
   devtool: 'source-map',
+  output: {
+    path: resolve("build"),
+    filename: "[name].bundle.js",
+    clean: true,
+  },
   devServer: {
     open: true,
     hot: true,
   },
 };
 
-export const webpackDevConfig = merge(config, webpackDevConfigPart);
+export default merge(config, webpackDevConfigPart);

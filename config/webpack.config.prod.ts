@@ -1,4 +1,5 @@
-import { Configuration, WebpackPluginInstance } from "webpack";
+import { resolve } from 'path';
+import { Configuration } from "webpack";
 import { merge } from "webpack-merge";
 import CompressionPlugin from "compression-webpack-plugin";
 
@@ -6,6 +7,11 @@ import { config } from "./webpack.config.common";
 
 const webpackProdConfigPart: Configuration = {
   mode: "production",
+  output: {
+    path: resolve("build"),
+    filename: "[name].[chunkhash].bundle.js",
+    clean: true,
+  },
   performance: {
     hints: "warning",
     maxAssetSize: 1_000_000,
@@ -25,4 +31,4 @@ const webpackProdConfigPart: Configuration = {
   ],
 };
 
-export const webpackProdConfig = merge(config, webpackProdConfigPart);
+export default merge(config, webpackProdConfigPart);
