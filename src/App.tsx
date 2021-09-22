@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-
-const Span = styled.span`
-  color: orange;
-`;
+import { HomePageHeader } from "./home-page";
 
 export default function App() {
-  return <Span>Hello world</Span>;
+  return (
+    <>
+      <HomePageHeader />
+    </>
+  );
 }
