@@ -1,3 +1,3 @@
 import { ButtonSecondary } from '@shared';
 
-export const AddMovie = () => <ButtonSecondary>+ Add Movie</ButtonSecondary>;
+export const AddMovie = () => <ButtonSecondary>+ ADD MOVIE</ButtonSecondary>;

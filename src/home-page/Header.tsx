@@ -1,12 +1,12 @@
 import { HeaderTopWrapper } from './HeaderTop';
-import { Search } from "./Search";
+import { SearchWrapper } from "./HeaderSearch";
 import { HeaderWrapper } from "./HeaderWrapper";
 
 export const HomePageHeader = () => {
   return (
     <HeaderWrapper>
       <HeaderTopWrapper />
-      <Search />
+      <SearchWrapper />
     </HeaderWrapper>
   );
 };

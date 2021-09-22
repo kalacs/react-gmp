@@ -1,16 +1,10 @@
-import { FC } from 'react';
 import styled from 'styled-components';
+import { transparentize } from 'polished';
 
-const Button = styled.button`
-  font-size: 20px;
-  padding: 0.55em 0.9em;
-  border-radius: 4px;
-  background-color: ${({theme}) => theme.palette.accentVariant};
-  border: none;
-  opacity: 0.68;
-  color: ${({theme}) => theme.palette.primary};
+import { ButtonBase } from './ButtonBase';
+
+export const ButtonSecondary = styled(ButtonBase)`
+  background-color: ${({ theme }) =>
+    transparentize(0.68, theme.palette.accentVariant)};
+  color: ${({ theme }) => theme.palette.primary};
 `;
-
-export const ButtonSecondary: FC = (props) => {
-  return <Button>{props.children}</Button>;
-}

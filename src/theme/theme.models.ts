@@ -1,5 +1,5 @@
 export interface ThemeSizes {
-  pageHorizontalPadding: string;
+  pagePadding: string;
 }
 
 declare module 'styled-components' {

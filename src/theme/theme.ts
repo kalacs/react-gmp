@@ -4,15 +4,15 @@ import headerBackground from '@assets/header-top-background.png';
 
 export const defaultTheme: DefaultTheme = {
   size: {
-    pageHorizontalPadding: '20px',
+    pagePadding: '20px 60px 0',
   },
   palette: {
     primary: '#F65261',
-    secondary: '#424242',
+    secondary: '#323232',
     secondaryVariant: '#555',
     accent: '#232323',
     accentVariant: '#606060',
-    textPrimary: '#FFFFF',
+    textPrimary: '#FFF',
   },
   urls: {
     headerBackground,

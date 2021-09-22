@@ -10,13 +10,14 @@ export const GlobalStyles = createGlobalStyle`
   body,
   html {
     margin: 0;
+    font-size: 10px;
   }
 
   body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-size: 10px;
+    background-color: ${({theme}) => theme.palette.secondaryVariant};
   }
 
   #root {
@@ -26,6 +27,6 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: column;
     flex: 1;
     font-size: 1.6rem;
-    min-width: 600px; // hardcode for now. Remove later
+    min-width: 1200px; // hardcode for now. Remove later
   }
 `;

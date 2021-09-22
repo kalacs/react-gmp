@@ -10,8 +10,8 @@ import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyles />
     <ThemeProvider theme={defaultTheme}>
+      <GlobalStyles />
       <App />
     </ThemeProvider>
   </React.StrictMode>,

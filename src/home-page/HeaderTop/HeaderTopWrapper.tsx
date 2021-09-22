@@ -6,7 +6,7 @@ import { Logo } from "./Logo";
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 5px ${props => props.theme.size.pageHorizontalPadding};
+  padding: ${props => props.theme.size.pagePadding};
 `;
 
 export const HeaderTopWrapper = () => {
