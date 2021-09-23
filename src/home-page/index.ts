@@ -1,1 +1,2 @@
-export { HomePageHeader } from './Header';
+export * from './Header';
+export * from './Content';

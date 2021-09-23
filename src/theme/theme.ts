@@ -4,7 +4,8 @@ import headerBackground from '@assets/header-top-background.png';
 
 export const defaultTheme: DefaultTheme = {
   size: {
-    pagePadding: '20px 60px 0',
+    pageVerticalPadding: '20px',
+    pageHorizontalPadding: '60px',
   },
   palette: {
     primary: '#F65261',

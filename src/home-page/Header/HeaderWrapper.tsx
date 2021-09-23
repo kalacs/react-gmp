@@ -4,11 +4,12 @@ import { transparentize } from 'polished';
 
 import { FlexColumnContainer } from '@shared';
 
-const Wrapper = styled(FlexColumnContainer)`
+export const HeaderWrapper = styled(FlexColumnContainer)`
   position: relative;
   max-height: 396px;
   background-color: ${({theme}) => transparentize('0.5', theme.palette.accent)};
   overflow: hidden;
+  margin-bottom: 5px;
 
   &::after {
     position: absolute;
@@ -26,7 +27,3 @@ const Wrapper = styled(FlexColumnContainer)`
     filter: blur(4px);
   }
 `;
-
-export const HeaderWrapper: FC = (props) => {
-  return <Wrapper>{props.children}</Wrapper>;
-};
