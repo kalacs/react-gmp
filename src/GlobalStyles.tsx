@@ -18,15 +18,16 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: column;
     min-height: 100vh;
     background-color: ${({theme}) => theme.palette.secondaryVariant};
+    color: ${({theme}) => theme.palette.textPrimary};
   }
 
   #root {
     margin: 0 auto;
     max-width: 1200px;
+    min-width: 600px;
     display: flex;
     flex-direction: column;
     flex: 1;
     font-size: 1.6rem;
-    min-width: 1200px; // hardcode for now. Remove later
   }
 `;

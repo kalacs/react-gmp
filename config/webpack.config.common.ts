@@ -10,6 +10,7 @@ export const config: Configuration = {
       '@shared': resolve("src", "shared"),
       '@theme': resolve("src", "theme"),
       '@assets': resolve("src", "assets"),
+      '@api': resolve("src", "api"),
     }
   },
   module: {

@@ -22,6 +22,7 @@
       "@shared": ["src/shared/index.ts"],
       "@theme": ["src/theme/index.ts"],
       "@assets/*": ["src/assets/*"],
+      "@api/*": ["src/api/*"],
     }
   },
   "exclude": ["node_modules"]
