@@ -8,6 +8,8 @@ const Wrapper = styled(FlexColumnContainer)`
   margin: 50px auto;
   max-width: 900px;
   width: 100%;
+  padding: 0 10px;
+
   .header-search-title {
     color: ${({ theme }) => theme.palette.textPrimary};
     font-weight: normal;

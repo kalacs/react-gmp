@@ -25,6 +25,7 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0 auto;
     max-width: 1200px;
     min-width: 600px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     flex: 1;
