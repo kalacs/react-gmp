@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import PropTypes from 'prop-types';
 
 import { Movie as MovieModel } from '@api/Movies';
 
@@ -23,14 +22,4 @@ export const Movie: FC<MovieModel> = ({
       </div>
     </MovieWrapper>
   );
-};
-
-// to be removed
-// no need to use proTypes due to typescript
-
-Movie.propTypes = {
-  title: PropTypes.string.isRequired,
-  releaseDate: PropTypes.string.isRequired,
-  coverUrl: PropTypes.string.isRequired,
-  genre: PropTypes.array.isRequired,
 };

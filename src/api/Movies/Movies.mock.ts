@@ -14,31 +14,31 @@ export function fetchMovies(): Movie[] {
       title: 'Pulp Fiction',
       genre: [MovieGenre.ActionAdventure],
       coverUrl: PulpFiction,
-      releaseDate: '2004',
+      releaseDate: '2004-09-30T14:33:17Z',
     },
     {
       title: 'Bohemian Rhapsody',
       genre: [MovieGenre.Drama, MovieGenre.Biography, MovieGenre.Music],
       coverUrl: RhapsodyCover,
-      releaseDate: '2003',
+      releaseDate: '2003-09-30T14:33:17Z',
     },
     {
       title: 'Kill Bill: Vol2',
       genre: [MovieGenre.OscarWining],
       coverUrl: KillBillCover,
-      releaseDate: '1994',
+      releaseDate: '1994-09-30T14:33:17Z',
     },
     {
       title: 'Avengers: War of infinity',
       genre: [MovieGenre.ActionAdventure],
       coverUrl: AvengersCover,
-      releaseDate: '2004',
+      releaseDate: '2004-09-30T14:33:17Z',
     },
     {
       title: 'Inception',
       genre: [MovieGenre.ActionAdventure],
       coverUrl: InceptionCover,
-      releaseDate: '2004',
+      releaseDate: '2005-09-30T14:33:17Z',
     },
   ];
 }
