@@ -19,8 +19,8 @@ export const HomePageHeader = () => {
         <Modal>
           <AddMovieModal
             onClose={() => setIsOpen(false)}
-            onReset={() => null/* todo */}
-            onSubmit={() => null/* todo */}
+            onReset={() => null /* todo */}
+            onSubmit={() => null /* todo */}
           ></AddMovieModal>
         </Modal>
       )}
