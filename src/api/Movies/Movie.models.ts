@@ -11,4 +11,7 @@ export interface Movie {
   releaseDate: string;
   genre: MovieGenre[];
   coverUrl: string;
+  rating: number;
+  runtime: number;
+  description: string;
 }

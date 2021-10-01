@@ -1,9 +1,12 @@
 export { FlexColumnContainer } from './FlexColumnContainer';
-export { ButtonSecondary } from './ButtonSecondary';
+export * from './ButtonSecondary';
 export { Input } from './Input';
-export { ButtonPrimary } from './ButtonPrimary';
+export * from './ButtonPrimary';
 export { Footer } from './Footer';
 export { Logo } from './Logo';
 export { ButtonBase } from './ButtonBase';
 export * from './Select';
 export { ErrorBoundary } from './ErrorBoundary';
+export * from './Modal';
+export * from './AddMovie';
+export * from './FormControls';

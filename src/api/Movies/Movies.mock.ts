@@ -15,30 +15,49 @@ export function fetchMovies(): Movie[] {
       genre: [MovieGenre.ActionAdventure],
       coverUrl: PulpFiction,
       releaseDate: '2004-09-30T14:33:17Z',
+      rating: 5,
+      runtime: 103,
+      description: getMockedDescription(),
     },
     {
       title: 'Bohemian Rhapsody',
       genre: [MovieGenre.Drama, MovieGenre.Biography, MovieGenre.Music],
       coverUrl: RhapsodyCover,
       releaseDate: '2003-09-30T14:33:17Z',
+      rating: 10,
+      runtime: 120,
+      description: getMockedDescription(),
     },
     {
       title: 'Kill Bill: Vol2',
       genre: [MovieGenre.OscarWining],
       coverUrl: KillBillCover,
       releaseDate: '1994-09-30T14:33:17Z',
+      rating: 9,
+      runtime: 100,
+      description: getMockedDescription(),
     },
     {
       title: 'Avengers: War of infinity',
       genre: [MovieGenre.ActionAdventure],
       coverUrl: AvengersCover,
       releaseDate: '2004-09-30T14:33:17Z',
+      rating: 8,
+      runtime: 153,
+      description: getMockedDescription(),
     },
     {
       title: 'Inception',
       genre: [MovieGenre.ActionAdventure],
       coverUrl: InceptionCover,
       releaseDate: '2005-09-30T14:33:17Z',
+      rating: 9,
+      runtime: 134,
+      description: getMockedDescription(),
     },
   ];
+}
+
+function getMockedDescription() {
+  return `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum`;
 }

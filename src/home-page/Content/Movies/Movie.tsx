@@ -4,12 +4,9 @@ import { Movie as MovieModel } from '@api/Movies';
 
 import { MovieWrapper } from './MovieWrapper';
 
-export const Movie: FC<MovieModel> = ({
-  coverUrl,
-  genre,
-  releaseDate,
-  title,
-}) => {
+export const Movie: FC<{ movie: MovieModel }> = ({ movie }) => {
+  const { coverUrl, genre, releaseDate, title } = movie;
+
   return (
     <MovieWrapper tabIndex={0}>
       <img className='movie-cover' src={coverUrl} alt='movie cover' />

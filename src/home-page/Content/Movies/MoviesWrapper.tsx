@@ -16,13 +16,7 @@ export const MoviesWrapper: FC<MoviesProps> = ({ movies }) => {
   return (
     <Wrapper>
       {movies.map((movie) => (
-        <Movie
-          key={movie.title}
-          title={movie.title}
-          genre={movie.genre}
-          releaseDate={movie.releaseDate}
-          coverUrl={movie.coverUrl}
-        />
+        <Movie movie={movie} />
       ))}
     </Wrapper>
   );
