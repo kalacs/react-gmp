@@ -16,7 +16,7 @@ export const MoviesWrapper: FC<MoviesProps> = ({ movies }) => {
   return (
     <Wrapper>
       {movies.map((movie) => (
-        <Movie movie={movie} />
+        <Movie movie={movie} key={movie.id} />
       ))}
     </Wrapper>
   );

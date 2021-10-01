@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { X } from '@styled-icons/octicons';
 
 import { TextArea } from '@shared/FormControls';
 import { FlexColumnContainer } from '@shared/FlexColumnContainer';
@@ -7,26 +6,12 @@ import { FlexColumnContainer } from '@shared/FlexColumnContainer';
 export const AddMovieModalWrapper = styled(FlexColumnContainer)`
   max-height: 800px;
   width: 950px;
-  padding: 30px 60px 60px;
+  padding: 30px 30px 60px;
 
   background-color: ${({ theme }) => theme.palette.accent};
 `;
 
-export const AddMovieHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-export const CloseModal = styled(X)`
-  cursor: pointer;
-`;
-
 export const ContentWrapper = styled(FlexColumnContainer)``;
-
-export const ModalTitle = styled.h2`
-  font-size: 4rem;
-  font-weight: normal;
-`;
 
 export const AddMovieActionsWrapper = styled.div`
   display: flex;

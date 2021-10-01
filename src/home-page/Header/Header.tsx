@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Modal, AddMovieModal } from '@shared';
+import { Modal, AddMovieModal, DeleteMovie } from '@shared';
 
 import { HeaderTopWrapper } from './HeaderTop';
 import { SearchWrapper } from './HeaderSearch';

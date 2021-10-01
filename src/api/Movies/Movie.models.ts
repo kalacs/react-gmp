@@ -7,6 +7,7 @@ export enum MovieGenre {
 }
 
 export interface Movie {
+  id: string;
   title: string;
   releaseDate: string;
   genre: MovieGenre[];
