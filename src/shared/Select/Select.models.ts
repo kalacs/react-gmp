@@ -1,4 +1,4 @@
-import { type } from 'os'
+import { type } from 'os';
 
 export interface SelectOption<TId> {
   id: TId;
@@ -21,4 +21,11 @@ export interface SelectPropsMultiple<TId> extends SelectPropsBase<TId> {
   onSelect: (optionId: TId[]) => void;
 }
 
-export type SelectProps<TId> = SelectPropsSingle<TId> | SelectPropsMultiple<TId>;
+export type SelectProps<TId> =
+  | SelectPropsSingle<TId>
+  | SelectPropsMultiple<TId>;
+
+export interface SelectState<TId> {
+  isOpen: boolean;
+  selectedOptions: Set<TId>;
+}

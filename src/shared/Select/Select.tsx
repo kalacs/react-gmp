@@ -5,7 +5,7 @@ import { CheckSquare, Checkbox } from '@styled-icons/boxicons-regular';
 import { SelectOption } from '@shared';
 import { Input } from '@shared/FormControls';
 
-import { SelectProps } from './Select.models';
+import { SelectProps, SelectState } from './Select.models';
 import {
   Option,
   OptionsWrapper,
@@ -14,14 +14,17 @@ import {
 } from './Select.styles';
 import { isMultiSelect } from './Select.helpers';
 
-export class Select<TId> extends PureComponent<SelectProps<TId>> {
+export class Select<TId> extends PureComponent<
+  SelectProps<TId>,
+  SelectState<TId>
+> {
   static defaultProps: Partial<SelectProps<unknown>> = {
     placeholder: 'Select something',
   };
 
   selectClass = 'select-component';
 
-  state = {
+  state: SelectState<TId> = {
     isOpen: false,
     selectedOptions: new Set<TId>(),
   };
@@ -58,15 +61,16 @@ export class Select<TId> extends PureComponent<SelectProps<TId>> {
   }
 
   private onOptionSelect = (optionId: TId, e: ReactMouseEvent) => {
+    const selectedOptions = this.state.selectedOptions;
+
+    if (selectedOptions.has(optionId)) {
+      selectedOptions.delete(optionId);
+    } else {
+      selectedOptions.add(optionId);
+    }
+
     if (isMultiSelect<TId>(this.props)) {
       e.nativeEvent.stopImmediatePropagation();
-      const selectedOptions = this.state.selectedOptions;
-      if (selectedOptions.has(optionId)) {
-        selectedOptions.delete(optionId);
-      } else {
-        selectedOptions.add(optionId);
-      }
-
       this.props.onSelect([...selectedOptions]);
     } else {
       this.props.onSelect(optionId);
@@ -74,20 +78,37 @@ export class Select<TId> extends PureComponent<SelectProps<TId>> {
   };
 
   private findSelectedOption() {
-    const { value } = this.props;
-
-    if (value == null) {
+    if (this.props.value == null) {
       return null;
     }
 
-    return this.props.options.find(({ id }) => id === value);
+    const optionsMap = new Map(
+      this.props.options.map(({ id, name }) => [id, name])
+    );
+
+    if (isMultiSelect<TId>(this.props)) {
+      return this.props.value.map((id) => optionsMap.get(id)).join(', ');
+    } else {
+      return optionsMap.get(this.props.value);
+    }
+  }
+
+  private getCheckbox(id: TId) {
+    if (!isMultiSelect(this.props)) {
+      return;
+    }
+
+    if (this.state.selectedOptions.has(id)) {
+      return <CheckSquare size='20' />;
+    }
+
+    return <Checkbox size='20' />;
   }
 
   render() {
     const { isOpen } = this.state;
     const { options, placeholder } = this.props;
-
-    const selectedOption = this.findSelectedOption();
+    const triggerValue = this.findSelectedOption();
 
     return (
       <SelectWrapper onClick={this.toggleIsOpen} className={this.selectClass}>
@@ -95,7 +116,7 @@ export class Select<TId> extends PureComponent<SelectProps<TId>> {
           <Input
             className='select-trigger'
             readOnly
-            value={selectedOption?.name}
+            value={triggerValue ?? ''}
             placeholder={placeholder}
           ></Input>
           <ThemeConsumer>
@@ -117,11 +138,7 @@ export class Select<TId> extends PureComponent<SelectProps<TId>> {
                 onClick={(e) => this.onOptionSelect(id, e)}
                 data-value={id}
               >
-                {this.state.selectedOptions.has(id) ? (
-                  <CheckSquare size='20' />
-                ) : (
-                  <Checkbox size='20' />
-                )}
+                {this.getCheckbox(id)}
                 {name}
               </Option>
             ))}

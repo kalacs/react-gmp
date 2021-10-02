@@ -36,6 +36,10 @@ const Wrapper = styled.div`
   .sort-label {
     opacity: 0.6;
   }
+
+  .select-trigger {
+    background: transparent;
+  }
 `;
 
 export const ControlsWrapper: FC<SortControlProps> = (props) => {

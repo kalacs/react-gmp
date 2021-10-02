@@ -10,6 +10,10 @@ import { AddMovieProps } from './AddMovie.models';
 import { GENRE_OPTIONS } from './AddMovie.constants';
 
 export class AddMovie extends PureComponent<AddMovieProps> {
+  state = {
+    selectedGenre: [],
+  }
+
   render() {
     const {
       coverUrl,
@@ -20,6 +24,8 @@ export class AddMovie extends PureComponent<AddMovieProps> {
       runtime,
       title,
     } = this.props?.movie || {};
+
+    const genreToUse = this.state.selectedGenre.length ? this.state.selectedGenre : genre;
 
     return (
       <>
@@ -37,9 +43,11 @@ export class AddMovie extends PureComponent<AddMovieProps> {
               GENRE
               <Select<MovieGenre>
                 multi={true}
-                value={genre}
+                value={genreToUse}
                 options={GENRE_OPTIONS}
-                onSelect={(ids) => console.log(ids)}
+                onSelect={(ids) => this.setState({
+                  selectedGenre: ids
+                })}
                 placeholder='Select genre'
               />
             </Label>

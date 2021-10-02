@@ -7,7 +7,7 @@ import { SearchWrapper } from './HeaderSearch';
 import { HeaderWrapper } from './HeaderWrapper';
 
 export const HomePageHeader = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
