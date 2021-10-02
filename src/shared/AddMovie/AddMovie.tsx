@@ -1,9 +1,13 @@
 import { PureComponent } from 'react';
+import { MovieGenre } from '@api/Movies';
 
 import { Label, Input } from '@shared/FormControls';
 
+import { Select } from '@shared';
+
 import { AddMovieForm, MovieDescription } from './AddMovie.styles';
 import { AddMovieProps } from './AddMovie.models';
+import { GENRE_OPTIONS } from './AddMovie.constants';
 
 export class AddMovie extends PureComponent<AddMovieProps> {
   render() {
@@ -31,7 +35,13 @@ export class AddMovie extends PureComponent<AddMovieProps> {
             </Label>
             <Label>
               GENRE
-              <Input value={genre} placeholder='should be multi select' />
+              <Select<MovieGenre>
+                multi={true}
+                value={genre}
+                options={GENRE_OPTIONS}
+                onSelect={(ids) => console.log(ids)}
+                placeholder='Select genre'
+              />
             </Label>
           </div>
           <div className='form-right'>

@@ -1,55 +1,18 @@
-import { PureComponent } from 'react';
-import { darken } from 'polished';
+import { PureComponent, MouseEvent as ReactMouseEvent } from 'react';
+import { ThemeConsumer } from 'styled-components';
+import { CheckSquare, Checkbox } from '@styled-icons/boxicons-regular';
 
-import { TriangleDown } from '@styled-icons/octicons';
-import styled, { ThemeConsumer } from 'styled-components';
+import { SelectOption } from '@shared';
+import { Input } from '@shared/FormControls';
 
 import { SelectProps } from './Select.models';
-import { SelectOption } from '@shared';
-
-const SelectTriangle = styled(TriangleDown)`
-  color: ${(props) => props.color};
-  margin-left: auto;
-`;
-
-const SelectWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  max-width: 190px;
-  min-width: 150px;
-
-  cursor: pointer;
-  position: relative;
-
-  .select-placeholder {
-    opacity: 0.5;
-  }
-
-  .placeholder-wrapper {
-    display: flex;
-    width: 100%;
-  }
-`;
-
-const OptionsWrapper = styled.div`
-  position: absolute;
-  width: 100%;
-  left: 0;
-  bottom: 0;
-  transform: translateY(100%);
-  z-index: 1;
-  background-color: ${({ theme }) => theme.palette.secondaryVariant};
-`;
-
-const Option = styled.div`
-  padding: 0.5em 0.6em;
-  border-bottom: 1px solid ${({ theme }) => theme.palette.accent};
-  &:hover {
-    transition: background-color 100ms;
-    background-color: ${({ theme }) =>
-      darken(0.1, theme.palette.secondaryVariant)};
-  }
-`;
+import {
+  Option,
+  OptionsWrapper,
+  SelectTriangle,
+  SelectWrapper,
+} from './Select.styles';
+import { isMultiSelect } from './Select.helpers';
 
 export class Select<TId> extends PureComponent<SelectProps<TId>> {
   static defaultProps: Partial<SelectProps<unknown>> = {
@@ -60,6 +23,7 @@ export class Select<TId> extends PureComponent<SelectProps<TId>> {
 
   state = {
     isOpen: false,
+    selectedOptions: new Set<TId>(),
   };
 
   toggleIsOpen = () => {
@@ -93,6 +57,22 @@ export class Select<TId> extends PureComponent<SelectProps<TId>> {
     document.removeEventListener('mousedown', this.handleOutsideClick);
   }
 
+  private onOptionSelect = (optionId: TId, e: ReactMouseEvent) => {
+    if (isMultiSelect<TId>(this.props)) {
+      e.nativeEvent.stopImmediatePropagation();
+      const selectedOptions = this.state.selectedOptions;
+      if (selectedOptions.has(optionId)) {
+        selectedOptions.delete(optionId);
+      } else {
+        selectedOptions.add(optionId);
+      }
+
+      this.props.onSelect([...selectedOptions]);
+    } else {
+      this.props.onSelect(optionId);
+    }
+  };
+
   private findSelectedOption() {
     const { value } = this.props;
 
@@ -105,19 +85,22 @@ export class Select<TId> extends PureComponent<SelectProps<TId>> {
 
   render() {
     const { isOpen } = this.state;
-    const { options, onSelect, placeholder } = this.props;
+    const { options, placeholder } = this.props;
 
     const selectedOption = this.findSelectedOption();
 
     return (
       <SelectWrapper onClick={this.toggleIsOpen} className={this.selectClass}>
         <div className='placeholder-wrapper'>
-          <span className='select-placeholder'>
-            {selectedOption?.name ?? placeholder}
-          </span>
+          <Input
+            className='select-trigger'
+            readOnly
+            value={selectedOption?.name}
+            placeholder={placeholder}
+          ></Input>
           <ThemeConsumer>
             {(theme) => (
-              <SelectTriangle color={theme.palette.primary} size='20' />
+              <SelectTriangle color={theme.palette.primary} size='25' />
             )}
           </ThemeConsumer>
         </div>
@@ -125,10 +108,20 @@ export class Select<TId> extends PureComponent<SelectProps<TId>> {
           <OptionsWrapper>
             {options.map(({ name, id }: SelectOption<TId>) => (
               <Option
+                className={
+                  this.state.selectedOptions.has(id)
+                    ? 'option-selected'
+                    : undefined
+                }
                 key={`${id}`}
-                onClick={() => onSelect(id)}
+                onClick={(e) => this.onOptionSelect(id, e)}
                 data-value={id}
               >
+                {this.state.selectedOptions.has(id) ? (
+                  <CheckSquare size='20' />
+                ) : (
+                  <Checkbox size='20' />
+                )}
                 {name}
               </Option>
             ))}

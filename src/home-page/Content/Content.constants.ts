@@ -8,10 +8,10 @@ export const enum SortOptions {
 export const SORT_OPTIONS: SelectOption<SortOptions>[] = [
   {
     id: SortOptions.ByReleaseDate,
-    name: 'RELEASE DATE',
+    name: 'Release date',
   },
   {
     id: SortOptions.ByTitle,
-    name: 'TITLE',
+    name: 'Title',
   },
 ];

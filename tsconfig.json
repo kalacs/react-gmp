@@ -18,6 +18,7 @@
     "jsx": "react-jsx",
     "sourceMap": true,
     "baseUrl": "./",
+    "downlevelIteration": true,
     "paths": {
       "@shared": ["src/shared/index.ts"],
       "@shared/*": ["src/shared/*"],

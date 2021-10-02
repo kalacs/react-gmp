@@ -1,6 +1,6 @@
 export { FlexColumnContainer } from './FlexColumnContainer';
 export * from './ButtonSecondary';
-export { Input } from './Input';
+export { SearchInput as Input } from './Input';
 export * from './ButtonPrimary';
 export { Footer } from './Footer';
 export { Logo } from './Logo';

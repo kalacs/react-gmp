@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-import { Modal, AddMovieModal, DeleteMovie } from '@shared';
+import { Modal, AddMovieModal } from '@shared';
 
 import { HeaderTopWrapper } from './HeaderTop';
 import { SearchWrapper } from './HeaderSearch';
 import { HeaderWrapper } from './HeaderWrapper';
 
 export const HomePageHeader = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <>

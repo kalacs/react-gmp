@@ -6,6 +6,5 @@ export const Label = styled.label`
   flex-direction: column;
   font-size: 1.6rem;
   color: ${({ theme }) => theme.palette.primary};
-  opacity: 0.8;
   cursor: pointer;
 `;
