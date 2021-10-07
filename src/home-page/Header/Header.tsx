@@ -4,7 +4,8 @@ import { Modal, AddMovieModal } from '@shared';
 
 import { HeaderTopWrapper } from './HeaderTop';
 import { SearchWrapper } from './HeaderSearch';
-import { HeaderWrapper } from './HeaderWrapper';
+import { HeaderWrapper } from './Header.styles';
+import { MovieDetails } from './MovieDetails';
 
 export const HomePageHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +14,8 @@ export const HomePageHeader = () => {
     <>
       <HeaderWrapper>
         <HeaderTopWrapper onAddMovie={() => setIsOpen(true)} />
-        <SearchWrapper />
+        {/* <SearchWrapper /> */}
+        <MovieDetails></MovieDetails>
       </HeaderWrapper>
       {isOpen && (
         <Modal>

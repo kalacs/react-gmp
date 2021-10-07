@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { Movie as MovieModel } from '@api/Movies';
+import { MovieCover } from '@shared';
 
 import { MovieWrapper } from './MovieWrapper';
 
@@ -9,7 +10,7 @@ export const Movie: FC<{ movie: MovieModel }> = ({ movie }) => {
 
   return (
     <MovieWrapper tabIndex={0}>
-      <img className='movie-cover' src={coverUrl} alt='movie cover' />
+      <MovieCover src={coverUrl} alt='movie cover' />
       <div className='movie-description-container'>
         <div className='movie-description-heading'>
           <span className='movie-title'>{title}</span>

@@ -11,3 +11,4 @@ export * from './Modal';
 export * from './AddMovie';
 export * from './FormControls';
 export * from './DeleteMovie';
+export * from './MovieCover';

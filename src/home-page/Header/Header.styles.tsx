@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import styled from 'styled-components';
 import { transparentize } from 'polished';
 
@@ -6,8 +5,9 @@ import { FlexColumnContainer } from '@shared';
 
 export const HeaderWrapper = styled(FlexColumnContainer)`
   position: relative;
-  max-height: 396px;
-  background-color: ${({theme}) => transparentize('0.5', theme.palette.accent)};
+  background-color: ${({ theme }) =>
+    transparentize('0.5', theme.palette.accent)};
+  background-color: rgba(0, 0, 0, 0.9);
   overflow: hidden;
   margin-bottom: 5px;
 

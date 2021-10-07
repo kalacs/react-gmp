@@ -8,12 +8,6 @@ export const MovieWrapper = styled.div`
   gap: 13px;
   cursor: pointer;
 
-  .movie-cover {
-    display: block;
-    height: 465px;
-    width: auto;
-  }
-
   .movie-description-container {
     display: flex;
     justify-content: space-between;
