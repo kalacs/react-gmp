@@ -1,12 +1,11 @@
-import { fetchMovies } from '@api/Movies';
+import { FC } from 'react';
 
 import { MovieCover } from '@shared';
 
 import { MovieDetailsWrapper } from './MovieDetails.styles';
+import { MovieDetailsProps } from './MovieDetails.models';
 
-const movie = fetchMovies()[0];
-
-export const MovieDetails = () => {
+export const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
   return (
     <MovieDetailsWrapper>
       <MovieCover src={movie.coverUrl}></MovieCover>

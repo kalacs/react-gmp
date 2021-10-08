@@ -30,6 +30,7 @@ export const MovieDetailsWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
     width: 60px;
     height: 60px;
     border-radius: 100%;

@@ -5,13 +5,19 @@ import { Logo } from '@shared';
 import { HeaderTopProps } from './HeaderTop.models';
 import { Wrapper, BackToSearch, AddMovie } from './HeaderTop.styles';
 
-export const HeaderTopWrapper: FC<HeaderTopProps> = ({ onAddMovie }) => {
+export const HeaderTopWrapper: FC<HeaderTopProps> = ({
+  onAddMovie,
+  onBackToSearch,
+  showBackToSearchIcon,
+}) => {
   return (
     <Wrapper>
       <Logo />
-      {/* <AddMovie onClick={onAddMovie}> + ADD MOVIE </AddMovie> */}
-      <BackToSearch size="24"></BackToSearch>
+      {showBackToSearchIcon ? (
+        <BackToSearch onClick={onBackToSearch} size='24'></BackToSearch>
+      ) : (
+        <AddMovie onClick={onAddMovie}> + ADD MOVIE </AddMovie>
+      )}
     </Wrapper>
   );
 };
-// todo add flag

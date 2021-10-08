@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
-import { Modal, AddMovieModal } from '@shared';
+import { Modal, AddMovieModal, MovieDetailsContext } from '@shared';
 
 import { HeaderTopWrapper } from './HeaderTop';
 import { SearchWrapper } from './HeaderSearch';
@@ -9,13 +9,24 @@ import { MovieDetails } from './MovieDetails';
 
 export const HomePageHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { movie, showMovieDetails } = useContext(MovieDetailsContext);
+
+  const isDetailsOpen = !!movie;
 
   return (
     <>
-      <HeaderWrapper>
-        <HeaderTopWrapper onAddMovie={() => setIsOpen(true)} />
-        {/* <SearchWrapper /> */}
-        <MovieDetails></MovieDetails>
+      <HeaderWrapper isDetailsOpen={isDetailsOpen}>
+        <HeaderTopWrapper
+          onBackToSearch={() => showMovieDetails(null)}
+          showBackToSearchIcon={isDetailsOpen}
+          onAddMovie={() => setIsOpen(true)}
+        />
+
+        {isDetailsOpen ? (
+          <MovieDetails movie={movie}></MovieDetails>
+        ) : (
+          <SearchWrapper />
+        )}
       </HeaderWrapper>
       {isOpen && (
         <Modal>
