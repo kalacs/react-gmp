@@ -12,7 +12,7 @@ export const HeaderWrapper = styled(FlexColumnContainer)<HeaderWrapperProps>`
       ? 'rgba(0, 0, 0, 0.9)'
       : transparentize('0.5', theme.palette.accent);
   }};
-  transition: background-color 100ms linear;
+  transition: background-color 100ms linear, height 100ms linear;
 
   overflow: hidden;
   margin-bottom: 5px;

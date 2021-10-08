@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useCallback } from 'react';
 
 import { Modal, AddMovieModal, MovieDetailsContext } from '@shared';
 
@@ -11,15 +11,19 @@ export const HomePageHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { movie, showMovieDetails } = useContext(MovieDetailsContext);
 
+  const hideMovieDetails = useCallback(() => showMovieDetails(null), []);
+  const showAddMovie = useCallback(() => setIsOpen(true), []);
+  const closeAddMovie = useCallback(() => setIsOpen(false), []);
+
   const isDetailsOpen = !!movie;
 
   return (
     <>
       <HeaderWrapper isDetailsOpen={isDetailsOpen}>
         <HeaderTopWrapper
-          onBackToSearch={() => showMovieDetails(null)}
+          onBackToSearch={hideMovieDetails}
           showBackToSearchIcon={isDetailsOpen}
-          onAddMovie={() => setIsOpen(true)}
+          onAddMovie={showAddMovie}
         />
 
         {isDetailsOpen ? (
@@ -31,7 +35,7 @@ export const HomePageHeader = () => {
       {isOpen && (
         <Modal>
           <AddMovieModal
-            onClose={() => setIsOpen(false)}
+            onClose={closeAddMovie}
             onReset={() => null /* todo */}
             onSubmit={() => null /* todo */}
           ></AddMovieModal>
