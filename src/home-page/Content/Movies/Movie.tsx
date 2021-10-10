@@ -1,11 +1,16 @@
 import { FC } from 'react';
 
-import { MovieCover } from '@shared';
+import { MovieCover, Menu } from '@shared';
 
-import { MovieWrapper } from './MovieWrapper';
 import { MovieProps } from './Movies.models';
+import { MovieWrapper, MovieContextMenuTrigger } from './Movies.styles';
+import { MENU_ITEMS, MenuItemsIds } from './Movies.constants';
 
-export const Movie: FC<MovieProps> = ({ movie, onMovieClick }) => {
+export const Movie: FC<MovieProps> = ({
+  movie,
+  onMovieClick,
+  onMenuItemClick,
+}) => {
   const { coverUrl, genre, releaseDate, title } = movie;
 
   return (
@@ -18,6 +23,20 @@ export const Movie: FC<MovieProps> = ({ movie, onMovieClick }) => {
         </div>
         <span className='movie-release-date'>{releaseDate}</span>
       </div>
+      <Menu<MenuItemsIds>
+        className='movie-menu'
+        items={MENU_ITEMS}
+        onItemClick={(id, e) => {
+          e.stopPropagation();
+          onMenuItemClick(id);
+        }}
+        triggerFactory={() => (
+          <MovieContextMenuTrigger
+            onClick={(e) => e.stopPropagation()}
+            className='movie-menu-trigger'
+          />
+        )}
+      ></Menu>
     </MovieWrapper>
   );
 };
