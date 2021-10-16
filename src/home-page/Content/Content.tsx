@@ -1,6 +1,14 @@
-import { PureComponent } from 'react';
+import { PureComponent, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchMovies } from '@api/Movies';
+import {
+  moviesSelector,
+  MoviesStatus,
+  moviesStatusSelector,
+  initFetchingMovies,
+  moviesLoadingSelector,
+} from '@store';
+import { LoadingOverlay } from '@shared';
 
 import { ContentWrapper } from './ContentWrapper';
 
@@ -10,47 +18,31 @@ import { SORT_OPTIONS, SortOptions } from './Content.constants';
 import { SORT_MAP } from './Content.helpers';
 import { ContentState } from './Content.models';
 
-export class Content extends PureComponent<unknown, ContentState> {
-  state: ContentState = {
-    sortOptions: SORT_OPTIONS,
-    sortBy: null,
-    movies: fetchMovies(),
-    sortedMovies: null,
-  };
+export const Content = () => {
+  const dispatch = useDispatch();
 
-  private sortMovies = (sortBy: SortOptions) => {
-    if (sortBy == null) {
-      this.setState({
-        ...this.state,
-        sortBy: sortBy,
-        sortedMovies: null,
-      });
+  const movies = useSelector(moviesSelector);
+  const moviesStatus = useSelector(moviesStatusSelector);
+  const moviesLoading = useSelector(moviesLoadingSelector);
 
-      return;
+  useEffect(() => {
+    if (moviesStatus === MoviesStatus.Idle) {
+      dispatch(initFetchingMovies());
     }
+  }, [moviesStatus, dispatch]);
 
-    const movieCopy = [...this.state.movies];
-
-    this.setState({
-      ...this.state,
-      sortBy: sortBy,
-      sortedMovies: movieCopy.sort(SORT_MAP[sortBy]),
-    });
-  };
-
-  render() {
-    return (
-      <ContentWrapper>
-        <ControlsWrapper
-          sortBy={this.state.sortBy}
-          options={this.state.sortOptions}
-          optionSelected={this.sortMovies}
-        />
-        <span>
-          <b>{this.state.movies.length}</b> movies found
-        </span>
-        <MoviesWrapper movies={this.state.sortedMovies || this.state.movies} />
-      </ContentWrapper>
-    );
-  }
-}
+  return (
+    <ContentWrapper>
+      <ControlsWrapper
+        sortBy={SortOptions.ByTitle}
+        options={SORT_OPTIONS}
+        optionSelected={() => null}
+      />
+      <span>
+        <b>{movies.length}</b> movies found
+      </span>
+      <MoviesWrapper movies={movies} />
+      {moviesLoading && <LoadingOverlay />}
+    </ContentWrapper>
+  );
+};

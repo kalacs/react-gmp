@@ -11,6 +11,7 @@ export const config: Configuration = {
       '@theme': resolve("src", "theme"),
       '@assets': resolve("src", "assets"),
       '@api': resolve("src", "api"),
+      '@store': resolve("src", "store"),
     }
   },
   module: {

@@ -11,7 +11,7 @@ import { Movie, MovieGenre } from './Movie.models';
 export function fetchMovies(): Movie[] {
   return [
     {
-      id: '1',
+      id: 1,
       title: 'Pulp Fiction',
       genre: [MovieGenre.ActionAdventure],
       coverUrl: PulpFiction,
@@ -21,7 +21,7 @@ export function fetchMovies(): Movie[] {
       description: getMockedDescription(),
     },
     {
-      id: '2',
+      id: 2,
       title: 'Bohemian Rhapsody',
       genre: [MovieGenre.Drama, MovieGenre.Biography, MovieGenre.Music],
       coverUrl: RhapsodyCover,
@@ -31,7 +31,7 @@ export function fetchMovies(): Movie[] {
       description: getMockedDescription(),
     },
     {
-      id: '3',
+      id: 3,
       title: 'Kill Bill: Vol2',
       genre: [MovieGenre.OscarWining],
       coverUrl: KillBillCover,
@@ -41,7 +41,7 @@ export function fetchMovies(): Movie[] {
       description: getMockedDescription(),
     },
     {
-      id: '4',
+      id: 4,
       title: 'Avengers: War of infinity',
       genre: [MovieGenre.ActionAdventure],
       coverUrl: AvengersCover,
@@ -51,7 +51,7 @@ export function fetchMovies(): Movie[] {
       description: getMockedDescription(),
     },
     {
-      id: '5',
+      id: 5,
       title: 'Inception',
       genre: [MovieGenre.ActionAdventure],
       coverUrl: InceptionCover,
