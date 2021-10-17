@@ -1,6 +1,6 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
 
-import { Movie } from '@api/Movies';
+import { Movie, SortOptions } from '@api/Movies';
 
 import { MoviesState, MoviesStatus, Payload } from './movie.store.models';
 import type { RootState } from './store';
@@ -11,6 +11,7 @@ const initialState: MoviesState = {
   limit: 0,
   offset: 0,
   totalAmount: 0,
+  sortBy: SortOptions.ByTitle,
 
   status: MoviesStatus.Idle,
   error: null,
@@ -20,7 +21,7 @@ export const movieSlice = createSlice({
   name: 'MoviesSlice',
   initialState: initialState,
   reducers: {
-    initFetchingMovies(state) {
+    fetchMoviesFromAPI(state) {
       return {
         ...state,
         status: MoviesStatus.Loading,
@@ -37,7 +38,7 @@ export const movieSlice = createSlice({
         status: MoviesStatus.LoadingSucceed,
       };
     },
-    fetchMoviesFailure(state, { payload }: Payload<Error>) {
+    fetchMoviesFailure(state, { payload }: Payload<string>) {
       return {
         ...state,
         ...initialState,
@@ -45,15 +46,25 @@ export const movieSlice = createSlice({
         status: MoviesStatus.LoadingFailed,
       };
     },
+    sortMoviesBy(state, { payload }: Payload<SortOptions>) {
+      return {
+        ...state,
+        sortBy: payload,
+      };
+    },
   },
 });
 
-export const { initFetchingMovies, fetchMoviesFailure, fetchMoviesSucceed } =
-  movieSlice.actions;
+export const {
+  fetchMoviesFromAPI,
+  fetchMoviesFailure,
+  fetchMoviesSucceed,
+  sortMoviesBy,
+} = movieSlice.actions;
 
 export const movieReducer = movieSlice.reducer;
 
-const movieStateSelector = (state: RootState) => state.movie;
+export const movieStateSelector = (state: RootState) => state.movie;
 
 export const moviesSelector = createSelector(
   movieStateSelector,
@@ -70,7 +81,18 @@ export const moviesStatusSelector = createSelector(
   (state) => state.status
 );
 
+export const moviesTotalSelector = createSelector(
+  movieStateSelector,
+  (state) => state.totalAmount
+);
+
+export const moviesSortBySelector = createSelector(
+  movieStateSelector,
+  (state) => state.sortBy
+);
+
 export const moviesLoadingSelector = createSelector(
   movieStateSelector,
-  ({ status }) => status === MoviesStatus.Loading || status === MoviesStatus.Idle
+  ({ status }) =>
+    status === MoviesStatus.Loading || status === MoviesStatus.Idle
 );

@@ -1,22 +1,32 @@
-import { call, put, takeLatest, delay } from 'redux-saga/effects';
+import { call, put, takeLatest, delay, select } from 'redux-saga/effects';
+import { isAxiosError } from '@types';
 
 import { fetchMoviesAPI, fetchMovieType } from '@api/Movies';
 import {
-  initFetchingMovies,
+  fetchMoviesFromAPI,
   fetchMoviesFailure,
   fetchMoviesSucceed,
+  movieStateSelector,
 } from './movie.slice';
+import { MoviesState } from './movie.store.models';
 
 function* fetchMovies() {
   try {
     yield delay(Math.random() * 2_000); // slight delay in loading to simulate network
-    const moviesResponse: Awaited<fetchMovieType> = yield call(fetchMoviesAPI);
+    const { sortBy }: MoviesState = yield select(movieStateSelector)
+    const moviesResponse: Awaited<fetchMovieType> = yield call(fetchMoviesAPI, {
+      sortBy,
+      sortOrder: 'asc',
+    });
+
     yield put(fetchMoviesSucceed(moviesResponse));
   } catch (e) {
-    yield put(fetchMoviesFailure(e as Error));
+    let errMessage = isAxiosError(e) ? e.message : 'Something went wrong';
+
+    yield put(fetchMoviesFailure(errMessage));
   }
 }
 
 export function* rootSaga() {
-  yield takeLatest(initFetchingMovies.type, fetchMovies);
+  yield takeLatest(fetchMoviesFromAPI.type, fetchMovies);
 }

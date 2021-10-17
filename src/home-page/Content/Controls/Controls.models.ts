@@ -1,6 +1,5 @@
 import { SelectOption } from '@shared';
-
-import { SortOptions } from '../Content.constants';
+import { SortOptions } from '@api/Movies';
 
 export interface SortControlProps {
   options: SelectOption<SortOptions>[];

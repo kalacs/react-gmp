@@ -1,4 +1,4 @@
-import { Movie } from '@api/Movies';
+import { Movie, SortOptions } from '@api/Movies';
 
 export const enum MoviesStatus {
   Loading,
@@ -12,8 +12,10 @@ export interface MoviesState {
   limit: number;
   offset: number;
   totalAmount: number;
+  sortBy: SortOptions;
+
   status: MoviesStatus;
-  error: Error | null;
+  error: string | null;
 }
 
 export interface Payload<PType> {

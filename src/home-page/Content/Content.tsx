@@ -1,46 +1,47 @@
-import { PureComponent, useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
   moviesSelector,
-  MoviesStatus,
-  moviesStatusSelector,
-  initFetchingMovies,
+  fetchMoviesFromAPI,
   moviesLoadingSelector,
+  moviesErrorSelector,
+  moviesTotalSelector,
+  moviesSortBySelector,
+  sortMoviesBy,
 } from '@store';
-import { LoadingOverlay } from '@shared';
+import { LoadingOverlay, Error } from '@shared';
 
 import { ContentWrapper } from './ContentWrapper';
 
 import { ControlsWrapper } from './Controls';
 import { MoviesWrapper } from './Movies';
-import { SORT_OPTIONS, SortOptions } from './Content.constants';
-import { SORT_MAP } from './Content.helpers';
-import { ContentState } from './Content.models';
+import { SORT_OPTIONS } from './Content.constants';
 
 export const Content = () => {
   const dispatch = useDispatch();
 
   const movies = useSelector(moviesSelector);
-  const moviesStatus = useSelector(moviesStatusSelector);
   const moviesLoading = useSelector(moviesLoadingSelector);
+  const moviesError = useSelector(moviesErrorSelector);
+  const moviesTotal = useSelector(moviesTotalSelector);
+  const moviesSortBy = useSelector(moviesSortBySelector);
 
   useEffect(() => {
-    if (moviesStatus === MoviesStatus.Idle) {
-      dispatch(initFetchingMovies());
-    }
-  }, [moviesStatus, dispatch]);
+    dispatch(fetchMoviesFromAPI());
+  }, [dispatch, moviesSortBy]);
 
   return (
     <ContentWrapper>
       <ControlsWrapper
-        sortBy={SortOptions.ByTitle}
+        sortBy={moviesSortBy}
         options={SORT_OPTIONS}
-        optionSelected={() => null}
+        optionSelected={(sortBy) => dispatch(sortMoviesBy(sortBy))}
       />
       <span>
-        <b>{movies.length}</b> movies found
+        <b>{moviesTotal}</b> movies found
       </span>
+      {moviesError && <Error>{moviesError}</Error>}
       <MoviesWrapper movies={movies} />
       {moviesLoading && <LoadingOverlay />}
     </ContentWrapper>

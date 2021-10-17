@@ -1,12 +1,22 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 import { API_URL } from './api.constants';
-import { Movie, MovieApi, MovieApiResponse } from './Movie.models';
+import {
+  Movie,
+  MovieApi,
+  MovieApiResponse,
+  FetchMovieParams,
+} from './Movie.models';
 
-export const fetchMoviesAPI = async (): Promise<MovieApiResponse<Movie[]>> => {
-  const apiResponse = await axios.get<
-    MovieApiResponse<MovieApi[]>
-  >(`${API_URL}/movies`);
+export const fetchMoviesAPI = async (
+  params: FetchMovieParams
+): Promise<MovieApiResponse<Movie[]>> => {
+  const apiResponse = await axios.get<MovieApiResponse<MovieApi[]>>(
+    `${API_URL}/movies`,
+    {
+      params,
+    }
+  );
 
   const { data } = apiResponse;
 

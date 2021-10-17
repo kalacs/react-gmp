@@ -38,3 +38,14 @@ export interface MovieApiResponse<T> {
   offset: number;
   totalAmount: number;
 }
+
+export const enum SortOptions {
+  ByReleaseDate = 'release_date',
+  ByTitle = 'title',
+  Rating = 'vote_average',
+}
+
+export interface FetchMovieParams {
+  sortBy: SortOptions;
+  sortOrder: 'asc' | 'desc';
+}

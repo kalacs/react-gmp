@@ -12,6 +12,7 @@ export const config: Configuration = {
       '@assets': resolve("src", "assets"),
       '@api': resolve("src", "api"),
       '@store': resolve("src", "store"),
+      '@types': resolve("types"),
     }
   },
   module: {
