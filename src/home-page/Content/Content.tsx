@@ -30,7 +30,6 @@ export const Content = () => {
   const moviesSortBy = useSelector(moviesSortBySelector);
   const moviesSearch = useSelector(moviesSearchSelector);
   const moviesFilterByGenre = useSelector(moviesFilterByGenreSelector);
-  console.log(moviesFilterByGenre)
 
   useEffect(() => {
     dispatch(fetchMoviesFromAPI());

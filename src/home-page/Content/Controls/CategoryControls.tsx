@@ -1,11 +1,17 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+import { FC } from 'react';
 
 import { MovieGenre } from '@api/Movies';
-import { moviesFilterByGenreSelector, filterByGenre } from '@store';
+import { filterByGenre } from '@store';
 
 import { ButtonBase } from '@shared';
 
-export const CategoryControls = () => {
+import { CategoryControlsProps } from './Controls.models';
+
+export const CategoryControls: FC<CategoryControlsProps> = ({
+  onGenreFilterChange,
+}) => {
   const dispatch = useDispatch();
 
   return (
@@ -13,7 +19,15 @@ export const CategoryControls = () => {
       <ButtonBase
         key='ALL'
         className='category-button'
-        onClick={() => dispatch(filterByGenre(null))}
+        onClick={(e) => {
+          dispatch(filterByGenre(null));
+
+          const target = e.target as HTMLElement;
+          onGenreFilterChange({
+            widthPx: target.clientWidth,
+            leftOffsetPx: target.offsetLeft,
+          });
+        }}
       >
         ALL
       </ButtonBase>
@@ -21,7 +35,15 @@ export const CategoryControls = () => {
         <ButtonBase
           className='category-button'
           key={genre}
-          onClick={() => dispatch(filterByGenre(genre))}
+          onClick={(e) => {
+            dispatch(filterByGenre(genre));
+
+            const target = e.target as HTMLElement;
+            onGenreFilterChange({
+              widthPx: target.clientWidth,
+              leftOffsetPx: target.offsetLeft,
+            });
+          }}
         >
           {genre.toUpperCase()}
         </ButtonBase>

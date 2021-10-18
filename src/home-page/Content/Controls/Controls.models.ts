@@ -6,3 +6,12 @@ export interface SortControlProps {
   sortBy: SortOptions | null;
   optionSelected: (sortBy: SortOptions) => void;
 }
+
+export interface ControlsProps {
+  widthPx: number;
+  leftOffsetPx: number;
+}
+
+export interface CategoryControlsProps {
+  onGenreFilterChange: (data: ControlsProps) => void;
+}
