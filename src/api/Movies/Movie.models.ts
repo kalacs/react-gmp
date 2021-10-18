@@ -1,9 +1,8 @@
 export enum MovieGenre {
-  ActionAdventure = 'Action & Adventure',
+  ActionAdventure = 'Adventure',
   Drama = 'Drama',
-  Biography = 'Biography',
   Music = 'Music',
-  OscarWining = 'Oscar Wining',
+  Comedy = 'Comedy',
 }
 
 export interface Movie {
@@ -45,7 +44,16 @@ export const enum SortOptions {
   Rating = 'vote_average',
 }
 
+export const enum SearchByOption {
+  ByTitle = 'title',
+  ByGenre = 'genres',
+}
+
 export interface FetchMovieParams {
   sortBy: SortOptions;
   sortOrder: 'asc' | 'desc';
+  limit: number;
+  search?: string;
+  searchBy: string;
+  filter?: MovieGenre[] | null;
 }

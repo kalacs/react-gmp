@@ -15,6 +15,15 @@ export const fetchMoviesAPI = async (
     `${API_URL}/movies`,
     {
       params,
+      paramsSerializer(param: Record<string, any>) {
+        return Object.entries(param)
+          .filter(([_, value]) => !!value)
+          .map(
+            ([key, value]) =>
+              `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+          )
+          .join('&');
+      },
     }
   );
 

@@ -9,6 +9,8 @@ import {
   moviesTotalSelector,
   moviesSortBySelector,
   sortMoviesBy,
+  moviesSearchSelector,
+  moviesFilterByGenreSelector,
 } from '@store';
 import { LoadingOverlay, Error } from '@shared';
 
@@ -26,10 +28,13 @@ export const Content = () => {
   const moviesError = useSelector(moviesErrorSelector);
   const moviesTotal = useSelector(moviesTotalSelector);
   const moviesSortBy = useSelector(moviesSortBySelector);
+  const moviesSearch = useSelector(moviesSearchSelector);
+  const moviesFilterByGenre = useSelector(moviesFilterByGenreSelector);
+  console.log(moviesFilterByGenre)
 
   useEffect(() => {
     dispatch(fetchMoviesFromAPI());
-  }, [dispatch, moviesSortBy]);
+  }, [dispatch, moviesSortBy, moviesSearch, moviesFilterByGenre]);
 
   return (
     <ContentWrapper>

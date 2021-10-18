@@ -1,6 +1,6 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
 
-import { Movie, SortOptions } from '@api/Movies';
+import { Movie, SortOptions, MovieGenre } from '@api/Movies';
 
 import { MoviesState, MoviesStatus, Payload } from './movie.store.models';
 import type { RootState } from './store';
@@ -12,6 +12,8 @@ const initialState: MoviesState = {
   offset: 0,
   totalAmount: 0,
   sortBy: SortOptions.ByTitle,
+  search: '',
+  filterByGenre: null,
 
   status: MoviesStatus.Idle,
   error: null,
@@ -52,6 +54,18 @@ export const movieSlice = createSlice({
         sortBy: payload,
       };
     },
+    searchMovies(state, { payload }: Payload<string>) {
+      return {
+        ...state,
+        search: payload,
+      };
+    },
+    filterByGenre(state, { payload }: Payload<MovieGenre | null>) {
+      return {
+        ...state,
+        filterByGenre: payload,
+      };
+    },
   },
 });
 
@@ -60,6 +74,8 @@ export const {
   fetchMoviesFailure,
   fetchMoviesSucceed,
   sortMoviesBy,
+  searchMovies,
+  filterByGenre,
 } = movieSlice.actions;
 
 export const movieReducer = movieSlice.reducer;
@@ -89,6 +105,16 @@ export const moviesTotalSelector = createSelector(
 export const moviesSortBySelector = createSelector(
   movieStateSelector,
   (state) => state.sortBy
+);
+
+export const moviesSearchSelector = createSelector(
+  movieStateSelector,
+  (state) => state.search
+);
+
+export const moviesFilterByGenreSelector = createSelector(
+  movieStateSelector,
+  (state) => state.filterByGenre
 );
 
 export const moviesLoadingSelector = createSelector(
