@@ -51,3 +51,7 @@ export const updateMovie = async (movie: Movie) => {
 export const deleteMovie = (movieId: number) => {
   return axios.delete(`${API_URL}/movies/${movieId}`);
 }
+
+export const createMovie = (movie: Movie) => {
+  return axios.post(`${API_URL}/movies/`, movieToMovieApi(movie));
+}

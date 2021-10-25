@@ -69,7 +69,8 @@ export const AddMovie: FC<AddMovieProps> = ({ movie, formik }) => {
             RUNTIME
             <Input
               value={values.runtime}
-              name='minutes'
+              name='runtime'
+              type="number"
               placeholder='minutes'
               onChange={handleChange}
             />

@@ -1,4 +1,4 @@
-import { PureComponent, FC } from 'react';
+import { FC } from 'react';
 import { useFormik } from 'formik';
 
 import { Movie } from '@api/Movies';
@@ -12,7 +12,9 @@ import {
   AddMovieModalWrapper,
   AddMovieActionsWrapper,
   ContentWrapper,
+  Errors,
 } from './AddMovie.styles';
+import { addMovieSchema } from './AddMovieSchema';
 
 export const AddMovieModal: FC<AddMovieModalProps> = ({
   movie,
@@ -25,6 +27,7 @@ export const AddMovieModal: FC<AddMovieModalProps> = ({
     onSubmit(movie) {
       onSubmit(movie);
     },
+    validationSchema: addMovieSchema,
   });
 
   return (
@@ -35,6 +38,13 @@ export const AddMovieModal: FC<AddMovieModalProps> = ({
       </ModalHeader>
       <ContentWrapper>
         <AddMovie movie={movie} formik={formik}></AddMovie>
+        {formik.errors && (
+          <Errors>
+            {Object.values(formik.errors).map((error) => (
+              <div>{error}</div>
+            ))}
+          </Errors>
+        )}
       </ContentWrapper>
       <AddMovieActionsWrapper>
         <ButtonPrimaryOutline>RESET</ButtonPrimaryOutline>
