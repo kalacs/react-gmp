@@ -7,7 +7,7 @@ import {
   DeleteMovie,
   Modal,
 } from '@shared';
-import { Movie as MovieModel, updateMovie } from '@api/Movies';
+import { Movie as MovieModel, updateMovie, deleteMovie } from '@api/Movies';
 import { fetchMoviesFromAPI } from '@store';
 
 import { Movie } from './Movie';
@@ -50,7 +50,16 @@ export const MoviesWrapper: FC<MoviesProps> = ({ movies }) => {
               setTargetMovie(null);
               setDeleteMovieOpen(false);
             }}
-            onConfirm={() => null}
+            onConfirm={async () => {
+              try {
+                await deleteMovie(targetMovie.id);
+                dispatch(fetchMoviesFromAPI());
+                setTargetMovie(null);
+                setEditMovieOpen(false);
+              } catch (e) {
+                console.log('error:', e);
+              }
+            }}
           />
         </Modal>
       )}
