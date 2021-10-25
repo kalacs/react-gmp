@@ -1,4 +1,5 @@
 import { FC, useContext, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import {
   MovieDetailsContext,
@@ -6,7 +7,8 @@ import {
   DeleteMovie,
   Modal,
 } from '@shared';
-import { Movie as MovieModel } from '@api/Movies';
+import { Movie as MovieModel, updateMovie } from '@api/Movies';
+import { fetchMoviesFromAPI } from '@store';
 
 import { Movie } from './Movie';
 import { MoviesProps } from './Movies.models';
@@ -20,6 +22,7 @@ export const MoviesWrapper: FC<MoviesProps> = ({ movies }) => {
   const [targetMovie, setTargetMovie] = useState<MovieModel | null>(null);
   const showEditModal = editMovieOpen && targetMovie;
   const showDeleteModal = deleteMovieOpen && targetMovie;
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -59,10 +62,15 @@ export const MoviesWrapper: FC<MoviesProps> = ({ movies }) => {
               setTargetMovie(null);
               setEditMovieOpen(false);
             }}
-            onSubmit={() => {
-              // do nothing for now
-              setTargetMovie(null);
-              setEditMovieOpen(false);
+            onSubmit={async (movie) => {
+              try {
+                await updateMovie(movie);
+                dispatch(fetchMoviesFromAPI());
+                setTargetMovie(null);
+                setEditMovieOpen(false);
+              } catch (e) {
+                console.log('error:', e);
+              }
             }}
           />
         </Modal>
