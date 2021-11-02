@@ -13,7 +13,6 @@ export interface MoviesState {
   offset: number;
   totalAmount: number;
   sortBy: SortOptions;
-  search: string;
   filterByGenre: MovieGenre | null;
 
   status: MoviesStatus;
@@ -22,4 +21,5 @@ export interface MoviesState {
 
 export interface Payload<PType> {
   payload: PType;
+  type: string;
 }

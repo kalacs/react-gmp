@@ -1,4 +1,6 @@
-import { Movie, MovieApi } from './Movie.models';
+import { useParams } from 'react-router-dom';
+
+import { Movie, MovieApi, SearchMovieUrlParams } from './Movie.models';
 
 export function movieApiToMovie(movie: MovieApi): Movie {
   return {
@@ -24,4 +26,13 @@ export function movieToMovieApi(movie: Movie): Partial<MovieApi> {
     release_date: movie.releaseDate,
     runtime: movie.runtime,
   };
+}
+
+export function isSearchMovieUrl(params: any): params is SearchMovieUrlParams {
+  return !!(params as SearchMovieUrlParams).searchQuery;
+}
+
+export function useMovieSearch(): string {
+  const params = useParams();
+  return isSearchMovieUrl(params) && params.searchQuery ? params.searchQuery : '';
 }

@@ -1,16 +1,17 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useMovieSearch } from '@api/Movies';
+
 import {
   moviesSelector,
-  fetchMoviesFromAPI,
   moviesLoadingSelector,
   moviesErrorSelector,
   moviesTotalSelector,
   moviesSortBySelector,
   sortMoviesBy,
-  moviesSearchSelector,
   moviesFilterByGenreSelector,
+  useDispatchFetchMovieFromApi,
 } from '@store';
 import { LoadingOverlay, Error } from '@shared';
 
@@ -22,17 +23,18 @@ import { SORT_OPTIONS } from './Content.constants';
 
 export const Content = () => {
   const dispatch = useDispatch();
+  const moviesSearch = useMovieSearch();
+  const dispatchFetchMovies = useDispatchFetchMovieFromApi();
 
   const movies = useSelector(moviesSelector);
   const moviesLoading = useSelector(moviesLoadingSelector);
   const moviesError = useSelector(moviesErrorSelector);
   const moviesTotal = useSelector(moviesTotalSelector);
   const moviesSortBy = useSelector(moviesSortBySelector);
-  const moviesSearch = useSelector(moviesSearchSelector);
   const moviesFilterByGenre = useSelector(moviesFilterByGenreSelector);
 
   useEffect(() => {
-    dispatch(fetchMoviesFromAPI());
+    dispatchFetchMovies();
   }, [dispatch, moviesSortBy, moviesSearch, moviesFilterByGenre]);
 
   return (

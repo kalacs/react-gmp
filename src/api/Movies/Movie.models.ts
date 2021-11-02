@@ -57,3 +57,7 @@ export interface FetchMovieParams {
   searchBy: string;
   filter?: MovieGenre[] | null;
 }
+
+export interface SearchMovieUrlParams {
+  searchQuery?: string;
+}

@@ -1,22 +1,31 @@
 import { call, put, takeLatest, delay, select } from 'redux-saga/effects';
 import { isAxiosError } from '@types';
 
-import { fetchMoviesAPI, fetchMovieType, SearchByOption } from '@api/Movies';
+import {
+  fetchMoviesAPI,
+  fetchMovieType,
+  SearchByOption,
+  SearchMovieUrlParams,
+} from '@api/Movies';
 import {
   fetchMoviesFromAPI,
   fetchMoviesFailure,
   fetchMoviesSucceed,
   movieStateSelector,
 } from './movie.slice';
-import { MoviesState } from './movie.store.models';
+import { MoviesState, Payload } from './movie.store.models';
 
-function* fetchMovies() {
+function* fetchMovies(params: Payload<SearchMovieUrlParams>) {
+  const { payload } = params;
+
   try {
     yield delay(Math.random() * 2_000); // slight delay in loading to simulate network
-    const { sortBy, search, filterByGenre }: MoviesState = yield select(movieStateSelector)
+    const { sortBy, filterByGenre }: MoviesState = yield select(
+      movieStateSelector
+    );
     const moviesResponse: Awaited<fetchMovieType> = yield call(fetchMoviesAPI, {
       sortBy,
-      search: search ? search : void 0,
+      search: payload.searchQuery ? payload.searchQuery : void 0,
       sortOrder: 'asc',
       searchBy: SearchByOption.ByTitle,
       limit: 9,
