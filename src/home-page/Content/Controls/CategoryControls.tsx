@@ -1,7 +1,6 @@
 import { FC, useEffect } from 'react';
 import {
   useHistory,
-  useLocation,
 } from 'react-router-dom';
 
 import { MovieGenre, useMovieSearch } from '@api/Movies';
@@ -14,9 +13,7 @@ export const CategoryControls: FC<CategoryControlsProps> = ({
   onGenreFilterChange,
 }) => {
   const history = useHistory();
-  const params = useLocation();
-  const { genre: selectedGenre } = useMovieSearch();
-  const searchParams = new URLSearchParams(params.search);
+  const { genre: selectedGenre, urlSearchParams } = useMovieSearch();
   let activeBtn: HTMLButtonElement | null = null;
 
   useEffect(() => {
@@ -33,10 +30,10 @@ export const CategoryControls: FC<CategoryControlsProps> = ({
         key='ALL'
         className='category-button'
         onClick={(e) => {
-          searchParams.delete('genre');
+          urlSearchParams.delete('genre');
 
           history.replace({
-            search: searchParams.toString(),
+            search: urlSearchParams.toString(),
           });
 
           const target = e.target as HTMLElement;
@@ -59,9 +56,9 @@ export const CategoryControls: FC<CategoryControlsProps> = ({
               }
             }}
             onClick={(e) => {
-              searchParams.set('genre', genre);
+              urlSearchParams.set('genre', genre);
               history.replace({
-                search: searchParams.toString(),
+                search: urlSearchParams.toString(),
               });
 
               const target = e.target as HTMLElement;

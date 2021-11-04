@@ -12,7 +12,6 @@ export interface MoviesState {
   limit: number;
   offset: number;
   totalAmount: number;
-  sortBy: SortOptions;
 
   status: MoviesStatus;
   error: string | null;

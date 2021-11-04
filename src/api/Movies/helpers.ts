@@ -1,6 +1,13 @@
 import { useParams, useLocation } from 'react-router-dom';
 
-import { Movie, MovieApi, SearchMovieUrlParams, MovieGenre } from './Movie.models';
+import {
+  Movie,
+  MovieApi,
+  SearchMovieUrlParams,
+  MovieGenre,
+  SearchMovieWithUrlParams,
+  SortOptions,
+} from './Movie.models';
 
 export function movieApiToMovie(movie: MovieApi): Movie {
   return {
@@ -28,18 +35,17 @@ export function movieToMovieApi(movie: Movie): Partial<MovieApi> {
   };
 }
 
-export function isSearchMovieUrl(params: any): params is SearchMovieUrlParams {
-  return !!(params as SearchMovieUrlParams).searchQuery;
-}
-
-export function useMovieSearch(): SearchMovieUrlParams {
+export function useMovieSearch(): SearchMovieWithUrlParams {
   const params: SearchMovieUrlParams = useParams();
   const location = useLocation();
   const urlParams = new URLSearchParams(location.search);
   const genre = urlParams.get('genre') as MovieGenre;
+  const sortBy = urlParams.get('sortBy') as SortOptions || SortOptions.ByTitle;
 
   return {
-    searchQuery: params.searchQuery || '',
     genre,
+    sortBy,
+    searchQuery: params.searchQuery || '',
+    urlSearchParams: urlParams,
   };
 }

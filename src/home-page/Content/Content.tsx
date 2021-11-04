@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { useMovieSearch } from '@api/Movies';
 
@@ -8,8 +9,6 @@ import {
   moviesLoadingSelector,
   moviesErrorSelector,
   moviesTotalSelector,
-  moviesSortBySelector,
-  sortMoviesBy,
   useDispatchFetchMovieFromApi,
 } from '@store';
 import { LoadingOverlay, Error } from '@shared';
@@ -22,25 +21,30 @@ import { SORT_OPTIONS } from './Content.constants';
 
 export const Content = () => {
   const dispatch = useDispatch();
-  const { searchQuery, genre } = useMovieSearch();
+  const { searchQuery, genre, sortBy, urlSearchParams } = useMovieSearch();
   const dispatchFetchMovies = useDispatchFetchMovieFromApi();
+  const history = useHistory();
 
   const movies = useSelector(moviesSelector);
   const moviesLoading = useSelector(moviesLoadingSelector);
   const moviesError = useSelector(moviesErrorSelector);
   const moviesTotal = useSelector(moviesTotalSelector);
-  const moviesSortBy = useSelector(moviesSortBySelector);
 
   useEffect(() => {
     dispatchFetchMovies();
-  }, [dispatch, moviesSortBy, searchQuery, genre]);
+  }, [dispatch, sortBy, searchQuery, genre]);
 
   return (
     <ContentWrapper>
       <ControlsWrapper
-        sortBy={moviesSortBy}
+        sortBy={sortBy!}
         options={SORT_OPTIONS}
-        optionSelected={(sortBy) => dispatch(sortMoviesBy(sortBy))}
+        optionSelected={(sortBy) => {
+          urlSearchParams.set('sortBy', sortBy);
+          history.replace({
+            search: urlSearchParams.toString(),
+          });
+        }}
       />
       <span>
         <b>{moviesTotal}</b> movies found
