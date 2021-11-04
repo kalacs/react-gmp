@@ -18,7 +18,6 @@ export const webpackDevConfigPart: WebpackDevConfiguration = {
     open: true,
     hot: true,
     historyApiFallback: true,
-
   },
 };
 

@@ -62,6 +62,7 @@ export interface SearchMovieUrlParams {
   searchQuery: string;
   genre?: MovieGenre;
   sortBy?: SortOptions;
+  movieId?: number;
 }
 
 export interface SearchMovieWithUrlParams extends SearchMovieUrlParams {

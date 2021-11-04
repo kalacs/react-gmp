@@ -36,15 +36,17 @@ export function movieToMovieApi(movie: Movie): Partial<MovieApi> {
 }
 
 export function useMovieSearch(): SearchMovieWithUrlParams {
-  const params: SearchMovieUrlParams = useParams();
+  const params = useParams() as SearchMovieUrlParams;
   const location = useLocation();
   const urlParams = new URLSearchParams(location.search);
   const genre = urlParams.get('genre') as MovieGenre;
   const sortBy = urlParams.get('sortBy') as SortOptions || SortOptions.ByTitle;
+  const movieId = parseInt(urlParams.get('movie')!, 10) || void 0;
 
   return {
     genre,
     sortBy,
+    movieId,
     searchQuery: params.searchQuery || '',
     urlSearchParams: urlParams,
   };
