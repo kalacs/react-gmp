@@ -6,12 +6,7 @@ import { fetchMoviesFromAPI } from './movie.slice';
 
 export const useDispatchFetchMovieFromApi = () => {
   const dispatch = useDispatch();
-  const searchQuery = useMovieSearch();
+  const movieSearch = useMovieSearch();
 
-  return () =>
-    dispatch(
-      fetchMoviesFromAPI({
-        searchQuery,
-      })
-    );
+  return () => dispatch(fetchMoviesFromAPI(movieSearch));
 };

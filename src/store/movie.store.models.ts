@@ -13,7 +13,6 @@ export interface MoviesState {
   offset: number;
   totalAmount: number;
   sortBy: SortOptions;
-  filterByGenre: MovieGenre | null;
 
   status: MoviesStatus;
   error: string | null;

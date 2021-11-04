@@ -6,6 +6,7 @@ import {
   fetchMovieType,
   SearchByOption,
   SearchMovieUrlParams,
+  FetchMovieParams,
 } from '@api/Movies';
 import {
   fetchMoviesFromAPI,
@@ -20,17 +21,21 @@ function* fetchMovies(params: Payload<SearchMovieUrlParams>) {
 
   try {
     yield delay(Math.random() * 2_000); // slight delay in loading to simulate network
-    const { sortBy, filterByGenre }: MoviesState = yield select(
-      movieStateSelector
-    );
-    const moviesResponse: Awaited<fetchMovieType> = yield call(fetchMoviesAPI, {
+    const { sortBy }: MoviesState = yield select(movieStateSelector);
+
+    const fetchParams: FetchMovieParams = {
       sortBy,
       search: payload.searchQuery ? payload.searchQuery : void 0,
       sortOrder: 'asc',
       searchBy: SearchByOption.ByTitle,
       limit: 9,
-      filter: filterByGenre ? [filterByGenre] : void 0,
-    });
+      filter: payload.genre ? [payload.genre] : void 0,
+    };
+
+    const moviesResponse: Awaited<fetchMovieType> = yield call(
+      fetchMoviesAPI,
+      fetchParams
+    );
 
     yield put(fetchMoviesSucceed(moviesResponse));
   } catch (e) {

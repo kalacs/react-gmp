@@ -12,7 +12,7 @@ import { Search } from './Search';
 import { Wrapper } from './Search.styles';
 
 export const SearchWrapper = () => {
-  const searchQuery = useMovieSearch();
+  const { searchQuery } = useMovieSearch();
   const [searchValue, setSearchValue] = useState(searchQuery);
   const history = useHistory();
   const match = useRouteMatch();

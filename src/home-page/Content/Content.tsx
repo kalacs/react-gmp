@@ -10,7 +10,6 @@ import {
   moviesTotalSelector,
   moviesSortBySelector,
   sortMoviesBy,
-  moviesFilterByGenreSelector,
   useDispatchFetchMovieFromApi,
 } from '@store';
 import { LoadingOverlay, Error } from '@shared';
@@ -23,7 +22,7 @@ import { SORT_OPTIONS } from './Content.constants';
 
 export const Content = () => {
   const dispatch = useDispatch();
-  const moviesSearch = useMovieSearch();
+  const { searchQuery, genre } = useMovieSearch();
   const dispatchFetchMovies = useDispatchFetchMovieFromApi();
 
   const movies = useSelector(moviesSelector);
@@ -31,11 +30,10 @@ export const Content = () => {
   const moviesError = useSelector(moviesErrorSelector);
   const moviesTotal = useSelector(moviesTotalSelector);
   const moviesSortBy = useSelector(moviesSortBySelector);
-  const moviesFilterByGenre = useSelector(moviesFilterByGenreSelector);
 
   useEffect(() => {
     dispatchFetchMovies();
-  }, [dispatch, moviesSortBy, moviesSearch, moviesFilterByGenre]);
+  }, [dispatch, moviesSortBy, searchQuery, genre]);
 
   return (
     <ContentWrapper>
