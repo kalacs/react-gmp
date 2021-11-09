@@ -27,7 +27,8 @@
       "@api/*": ["src/api/*"],
       "@store/*": ["src/store/*"],
       "@store": ["src/store/index.ts"],
-      "@types": ["types/index.ts"]
+      "@types": ["types/index.ts"],
+      "@test-utils": ["test-utils/index.ts"]
     }
   },
   "exclude": ["node_modules"]
