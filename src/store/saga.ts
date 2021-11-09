@@ -38,6 +38,7 @@ function* fetchMovies(params: Payload<SearchMovieUrlParams>) {
 
     yield put(fetchMoviesSucceed(moviesResponse));
   } catch (e) {
+    console.error(e);
     let errMessage = isAxiosError(e) ? e.message : 'Something went wrong';
 
     yield put(fetchMoviesFailure(errMessage));
