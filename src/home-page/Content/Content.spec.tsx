@@ -30,21 +30,23 @@ function renderWithRouter() {
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('Content Component', () => {
-  let mockedMoviesGet: jest.Mocked<unknown>;
-  beforeEach(() => {
-    mockedMoviesGet = mockedAxios.get.mockImplementation(() => {
+  it('should render component and display loading overlay', () => {
+    mockedAxios.get.mockImplementationOnce(() => {
       return Promise.resolve({
         data: mockMoviesResponse(),
       });
     });
-  });
-
-  it('should render component and display loading overlay', () => {
     renderWithRouter();
     expect(screen.getByTestId('loading-overlay')).toBeDefined();
   });
 
   it('should fetch movies on component init', async () => {
+    const mockedMoviesGet = mockedAxios.get.mockImplementationOnce(() => {
+      return Promise.resolve({
+        data: mockMoviesResponse(),
+      });
+    });
+
     renderWithRouter();
 
     const movieComponents = await waitFor(() =>
@@ -57,5 +59,20 @@ describe('Content Component', () => {
     expect(loadingOverlay).toBeNull();
     expect(movieComponents.length).toBe(mockMoviesResponse().data.length);
     expect(mockedMoviesGet).toBeCalled();
+  });
+
+  it('should display something went wrong in case of error', async () => {
+    mockedAxios.get.mockImplementationOnce(() => Promise.reject(new Error('mock error')));
+    renderWithRouter();
+
+    const errorMessage = await waitFor(() =>
+      screen.getByText(/something went wrong/i)
+    );
+
+
+    const loadingOverlay = screen.queryByTestId('loading-overlay');
+
+    expect(loadingOverlay).toBeNull();
+    expect(errorMessage).toBeTruthy();
   });
 });
