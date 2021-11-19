@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@babel/register": "^7.16.0",
     "@reduxjs/toolkit": "^1.6.2",
     "@styled-icons/boxicons-regular": "^10.38.0",
     "@styled-icons/octicons": "^10.42.0",
     "@types/express": "^4.17.13",
     "axios": "^0.23.0",
+    "babel-plugin-transform-assets": "^1.0.2",
     "express": "^4.17.1",
     "formik": "^2.2.9",
     "polished": "^4.1.3",

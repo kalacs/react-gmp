@@ -1,3 +1,20 @@
+
+require("@babel/register")({
+  presets: ["@babel/preset-env", "@babel/preset-react"],
+  "plugins": [
+    [
+      "transform-assets",
+      {
+        "extensions": [
+          "png",
+          "jpg"
+        ],
+        "name": "static/media/[name].[hash:8].[ext]"
+      }
+    ]
+  ]
+});
+
 import express from 'express';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
