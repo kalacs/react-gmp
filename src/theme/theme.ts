@@ -1,6 +1,7 @@
 import { DefaultTheme } from 'styled-components';
 
 import headerBackground from '@assets/header-top-background.png';
+// todo fix get file
 
 export const defaultTheme: DefaultTheme = {
   size: {
@@ -17,5 +18,5 @@ export const defaultTheme: DefaultTheme = {
   },
   urls: {
     headerBackground,
-  }
+  },
 };
